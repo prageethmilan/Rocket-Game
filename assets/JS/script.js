@@ -60,11 +60,22 @@ var moveAsteroids = setInterval(() => {
             var asteroid = asteroids[i];
             var asteroidTop = parseInt(window.getComputedStyle(asteroid).getPropertyValue("top"));
             if (asteroidTop >= 600) {
-                alert("Game Over");
+                let score = $("#scoreCard").text();
+                swal({
+                    title: "Warning",
+                    text: "Game Over. Your Score is " + score,
+                    icon: "warning",
+                    button: "Close",
+                });
+                $("#btnStart").css('display', 'block');
                 clearInterval(moveAsteroids);
-                window.location.reload();
+                clearInterval(rocks);
             }
             asteroid.style.top = asteroidTop + 15 + "px";
         }
     }
 }, 250);
+
+$("#btnStart").click(function () {
+    window.location.reload();
+});
