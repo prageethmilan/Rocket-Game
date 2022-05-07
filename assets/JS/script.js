@@ -1,6 +1,19 @@
 let rocket = document.getElementById("rocket");
 let background = document.getElementById("background");
 
+var sfx = {
+    shuttle: new Howl({
+        src: ['assets/sound/SpaceShuttle.mp3'],
+        loop: true
+    }),
+    move: new Howl({
+        src: ['https://assets.codepen.io/21542/howler-push.mp3',
+        ]
+    })
+}
+
+sfx.shuttle.play();
+
 window.addEventListener('keydown', function (e) {
     var left = parseInt(window.getComputedStyle(rocket).getPropertyValue("left"));
     if (e.key == "ArrowLeft" && left > 0) {
@@ -11,6 +24,7 @@ window.addEventListener('keydown', function (e) {
 
     if (e.key == "ArrowUp" || e.keyCode == 32) {
         var bullet = document.createElement("div");
+        sfx.move.play();
         bullet.classList.add("bullets");
         background.appendChild(bullet);
 
@@ -51,7 +65,7 @@ var rocks = setInterval(() => {
     var asteroidLeft = parseInt(window.getComputedStyle(asteroid).getPropertyValue("left"));
     asteroid.style.left = Math.floor(Math.random() * 930) + "px";
     background.appendChild(asteroid);
-}, 1500);
+}, 2000);
 
 var moveAsteroids = setInterval(() => {
     var asteroids = document.getElementsByClassName("asteroids");
@@ -61,6 +75,7 @@ var moveAsteroids = setInterval(() => {
             var asteroidTop = parseInt(window.getComputedStyle(asteroid).getPropertyValue("top"));
             if (asteroidTop >= 600) {
                 let score = $("#scoreCard").text();
+                sfx.shuttle.stop();
                 swal({
                     title: "Warning",
                     text: "Game Over. Your Score is " + score,
@@ -79,3 +94,15 @@ var moveAsteroids = setInterval(() => {
 $("#btnStart").click(function () {
     window.location.reload();
 });
+
+/*
+var sfx = {
+    move: new Howl({
+        src: ['https://assets.codepen.io/21542/howler-push.mp3',
+        ]
+    }),
+    shuttle: new Howl({
+        src: ['assets/sound/SpaceShuttle.mp3'],
+        loop: true
+    })
+}*/
