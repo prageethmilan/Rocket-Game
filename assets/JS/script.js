@@ -1,6 +1,3 @@
-let rocket = document.getElementById("rocket");
-let background = document.getElementById("background");
-
 var sfx = {
     shuttle: new Howl({
         src: ['assets/sound/SpaceShuttle.mp3'],
@@ -13,6 +10,9 @@ var sfx = {
 }
 
 sfx.shuttle.play();
+
+let rocket = document.getElementById("rocket");
+let background = document.getElementById("background");
 
 window.addEventListener('keydown', function (e) {
     var left = parseInt(window.getComputedStyle(rocket).getPropertyValue("left"));
@@ -65,7 +65,7 @@ var rocks = setInterval(() => {
     var asteroidLeft = parseInt(window.getComputedStyle(asteroid).getPropertyValue("left"));
     asteroid.style.left = Math.floor(Math.random() * 930) + "px";
     background.appendChild(asteroid);
-}, 2000);
+}, 1500);
 
 var moveAsteroids = setInterval(() => {
     var asteroids = document.getElementsByClassName("asteroids");
